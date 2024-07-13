@@ -25,7 +25,7 @@ export async function GET(request: Request) {
 
             return Response.json({
                 success: false,
-                message: "Invalid username",
+                message: "Username is not unique",
                 errors: usernameErrors
             },
             { status: 400 });
@@ -46,7 +46,9 @@ export async function GET(request: Request) {
             { status: 400 });
         }
 
-        return Response.json({ success: true, message: "Username available" });
+        return Response.json({ 
+            success: true, 
+            message: "Username is unique" });
 
     } catch (error: any) {
         console.log("Error checking Username", error);
