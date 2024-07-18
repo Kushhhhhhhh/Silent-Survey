@@ -81,12 +81,12 @@ const SignupPage = () => {
       setIsSubmitting(false)
 
     } catch (error) {
-      console.error("Error in signing up user", error)
+      console.error("Error in Signing up user", error)
       const axiosError = error as AxiosError<ApiResponse>
       let errorMessage = axiosError.response?.data.message
 
       toast({
-        title: "Signup Failed",
+        title: "SignUp Failed",
         description: errorMessage,
         variant: "destructive",
       })
