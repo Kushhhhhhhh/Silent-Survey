@@ -27,28 +27,33 @@ export async function GET(request: Request) {
     const userId = new mongoose.Types.ObjectId(user._id);
 
     try {
-
         const user = await UserModel.aggregate([
             {
                 $match: {
                     _id: userId
-                },
-                $unwind: {
-                    path: "$messages",
-                },
+                }
+            },
+            {
+                $unwind: "$messages"
+            },
+            {
                 $sort: {
                     "messages.createdAt": -1
-                },
+                }
+            },
+            {
                 $group: {
                     _id: "$_id",
                     messages: {
                         $push: "$messages"
                     }
                 }
-            },
-        ])
+            }
+        ]);
 
-        if(!user || user.length === 0){
+        console.log("Aggregated user data: ", user);
+
+        if (!user || user.length === 0) {
             return new Response(
                 JSON.stringify({
                     success: false,
@@ -58,16 +63,20 @@ export async function GET(request: Request) {
             );
         }
 
+        console.log("User ID:", userId);
+       const  checkingUser = await UserModel.findOne({_id: userId});
+       console.log("Checking user: ", checkingUser);
+       
+
         return new Response(
             JSON.stringify({
                 success: true,
                 messages: user[0].messages
             }),
             { status: 200 }
-        )
+        );
 
     } catch (error) {
-        
         console.log("Failed to get messages", error);
         return new Response(
             JSON.stringify({
@@ -75,6 +84,6 @@ export async function GET(request: Request) {
                 message: "Failed to get messages",
             }),
             { status: 500 }
-        )
+        );
     }
 }
