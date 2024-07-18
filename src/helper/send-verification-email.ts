@@ -13,9 +13,9 @@ export async function sendVerificationEmail(
                 subject: 'Incognito Chat | Verification Code',
                 react: VerificationEmail({ username, otp: verifyCode }),
               });
-            return {success: true, status: 200, message: "Successfully sent verification email" }
+            return {success: true, message: "Successfully sent verification email" }
         } catch (emailError) {
             console.log("Error sending verification Email", emailError);
-            return { success: false, status: 500, message: "Failed to send verification email" };
+            return { success: false, message: "Failed to send verification email" };
         }
 }
