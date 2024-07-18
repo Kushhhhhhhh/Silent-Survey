@@ -16,7 +16,7 @@ const Navbar = () => {
                 <div className="flex flex-row items-center">
                     <a className="flex items-center text-2xl font-bold mb-4 md:mb-0 text-[#212121] hover:text-gray-900 transition-colors" href="#">
                         <Image
-                            src='/favicon-ic.jpeg'
+                            src='/favicon-ic.jpg'
                             alt='Silent Survey Logo'
                             width={60}
                             height={60}
