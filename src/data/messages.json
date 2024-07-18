@@ -1,26 +1,26 @@
 [
     {
         "id": 1,
-        "title": "Message from User123",
-        "content": "Hello, how are you?",
+        "title": "Message from Funfrenzzy",
+        "content": "Take care of yourself ❤️",
         "recieved": "28 minutes ago"
     },
     {
         "id": 2,
         "title": "Message from stranger08",
-        "content": "I'm fine. Thank you.",
+        "content": "What's your salary💸",
         "recieved": "1 hour ago"
     },
     {
         "id": 3,
-        "title": "Message from Friend01",
-        "content": "Let's catch up soon!",
+        "title": "Message from Buddy23",
+        "content": "Let's catch up soon 😉",
         "received": "2 days ago"
     },
     {
         "id": 4,
         "title": "Message from Colleague22",
-        "content": "Can you review this document?",
+        "content": "Can you review this document📄",
         "received": "3 hours ago"
     }
 ]
