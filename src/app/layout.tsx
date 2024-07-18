@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Incognito Chat",
+  title: "Silent Survey",
   description: "Discover the power of anonymity with our cutting-edge Next.js application. Seamlessly integrated with full-stack capabilities, this platform empowers users to send anonymous messages securely and effortlessly. Whether it's sharing secrets, giving feedback, or connecting with others without revealing your identity, our robust system ensures privacy and reliability at every step. Dive into a world where your voice is heard, but your identity remains confidential.",
   keywords: "anonymous messaging, Next.js, full-stack application, secure messaging, privacy, confidential communication, feedback platform, secret sharing",
   publisher: "Kush Sharma",

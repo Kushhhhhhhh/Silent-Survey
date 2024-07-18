@@ -32,7 +32,7 @@ export default function Home() {
           )}
           <h1 className="text-3xl md:text-5xl font-bold mb-4">Explore the Realm of Anonymous Conversations</h1>
           <p className="text-lg font-medium mt-2">
-            Incognito Chat - Your Decentralized Hub for Secure and Anonymous Messaging.
+            Silent Survey - Your Decentralized Hub for Secure and Anonymous Messaging.
           </p>
         </section>
 

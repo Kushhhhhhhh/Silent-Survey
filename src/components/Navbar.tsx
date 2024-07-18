@@ -17,13 +17,13 @@ const Navbar = () => {
                     <a className="flex items-center text-2xl font-bold mb-4 md:mb-0 text-[#212121] hover:text-gray-900 transition-colors" href="#">
                         <Image
                             src='/favicon-ic.jpeg'
-                            alt='Incognito Chat Logo'
+                            alt='Silent Survey Logo'
                             width={60}
                             height={60}
                             className="w-10 h-10 mr-2 rounded-full"
                             priority
                         />
-                        Incognito Chat
+                        Silent Survey
                     </a>
                 </div>
 

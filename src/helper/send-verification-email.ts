@@ -10,7 +10,7 @@ export async function sendVerificationEmail(
             await resend.emails.send({
                 from: 'onboarding@resend.dev',
                 to: email,
-                subject: 'Incognito Chat | Verification Code',
+                subject: 'Silent Survey | Verification Code',
                 react: VerificationEmail({ username, otp: verifyCode }),
               });
             return {success: true, message: "Successfully sent verification email" }

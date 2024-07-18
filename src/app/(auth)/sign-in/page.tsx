@@ -58,7 +58,7 @@ const SignInPage = () => {
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
         <div className="w-full max-w-md p-8 space-x-8 bg-white rounded-lg shadow-md">
           <div className="text-center">
-            <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl mb-6">Join Incognito Chat</h1>
+            <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl mb-6">Join Silent Survey</h1>
             <p className="mb-4">Sign In to get started</p>
           </div>
   
