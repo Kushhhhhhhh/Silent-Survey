@@ -7,22 +7,20 @@ import axios, { AxiosError } from "axios"
 import { ApiResponse } from "@/types/api-response"
 import { useState } from "react"
 import { useSession } from "next-auth/react"
-import { User } from "@/model/User"
+import { useParams } from "next/navigation"
 
 export default function Component() {
-
   const { data: session } = useSession()
   const [message, setMessage] = useState('')
   const { toast } = useToast()
-  const user = session?.user 
-  const username = user?.username
+  const user = session?.user
+  const { username } = useParams()
 
   const handleClick = async () => {
-
-    if (!username) {
-      toast({ 
-        title: 'Error sending message', 
-        description: 'Please login to send messages' 
+    if (!user) {
+      toast({
+        title: 'Error sending message',
+        description: 'Please login to send messages'
       })
       return;
     }
@@ -36,6 +34,7 @@ export default function Component() {
         title: 'Message sent',
         description: response.data.message,
       })
+      setMessage('') 
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>
       toast({
