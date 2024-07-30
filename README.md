@@ -2,16 +2,17 @@
 
 ## A transformative feedback web application empowers you to gather unfiltered, honest insights by fostering a safe and anonymous environment.
 
-![alt text](<Screenshot (27).png>)
+![alt text](<Silent Survey.png>)
 
 ## Key Features:
 
-🌟 Tech stack: Next JS + MongoDB + Tailwind CSS  
+🌟 Tech stack: Next JS + AI Integration + MongoDB 
+🔮 Gemini API Integration
 🎃 Authentication && Authorization with NextAuth  
-👾 Prioritizing User Anonymity  
-🚀 Interactive and User-friendly Dashboard  
 👌 Zod for Schema Validation  
 🤖 ShadCN for customizable components  
+👾 Prioritizing User Anonymity  
+🚀 Interactive and User-friendly Dashboard  
 🐞 Error handling both on the server and on the client  
 ⏳ And much more!  
 
