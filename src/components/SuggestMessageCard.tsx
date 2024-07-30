@@ -8,7 +8,8 @@ import { Card } from './ui/card';
 async function fetchSuggestions() {
     console.log('Fetching suggestions...');
     try {
-      const response = await fetch('/api/suggest-messages');
+      const response = await fetch('/api/suggest-messages', {
+        cache: 'no-store'});
       if (!response.ok) {
         throw new Error('Failed to fetch suggestions');
       }
