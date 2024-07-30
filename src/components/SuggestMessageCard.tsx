@@ -1,7 +1,7 @@
 import { SVGProps, useEffect, useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from './ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { Loader2, RefreshCcw } from 'lucide-react';
 import { Card } from './ui/card';
 
@@ -9,32 +9,41 @@ async function fetchSuggestions() {
     console.log('Fetching suggestions...');
     try {
       const response = await fetch('/api/suggest-messages', {
-        cache: 'no-store'});
+        cache: 'no-store'
+      });
+      console.log('Response Status:', response.status);
+
       if (!response.ok) {
         throw new Error('Failed to fetch suggestions');
       }
+
       const data = await response.json();
+      console.log('Full API Response:', data);
       console.log('Fetched suggestions:', data.messages);
+      
       return data.messages;
     } catch (error) {
       console.error("Failed to fetch suggestions:", error);
+      return [];
     }
-  }
-  
+}
 
 export default function SuggestMessageCard() {
     const [messages, setMessages] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
     const loadSuggestions = async () => {
+        setIsLoading(true);
         try {
           const newMessages = await fetchSuggestions();
           console.log('Fetched new messages:', newMessages); 
           setMessages(newMessages);
         } catch (error) {
           console.error("Failed to load suggestions:", error);
+        } finally {
+          setIsLoading(false);
         }
-      };      
+      };
 
     const { toast } = useToast();
 
@@ -62,9 +71,7 @@ export default function SuggestMessageCard() {
                     variant="outline"
                     onClick={async () => {
                         console.log('Refreshing suggestions...');
-                        setIsLoading(true);
                         await loadSuggestions();
-                        setIsLoading(false);
                     }}
                 >
                     {isLoading ? (
