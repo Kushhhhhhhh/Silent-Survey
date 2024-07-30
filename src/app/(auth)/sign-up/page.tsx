@@ -76,8 +76,9 @@ const SignupPage = () => {
         title: "Success",
         description: response.data.message,
       })
-      // Use username to ensure correct value
-      router.replace(`/verify/${username}`) 
+
+      router.push('/sign-in')
+
       setIsSubmitting(false)
 
     } catch (error) {
