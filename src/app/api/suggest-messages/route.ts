@@ -15,7 +15,6 @@ const generationConfig = {
     responseMimeType: "text/plain",
 };
 
-
 export async function GET(request: Request) {
   try {
     const prompt = `Generate three unique open-ended questions for an anonymous social messaging platform. Each question should be separated by a newline. Ensure the questions are intriguing, avoid personal or sensitive topics, and foster a positive conversational environment. Request ID: ${Date.now()}`;
@@ -44,7 +43,13 @@ export async function GET(request: Request) {
     const messages = text.split("\n").map(msg => msg.trim()).filter(Boolean);
     console.log('Generated messages:', messages); // Log messages to verify
 
-    return new Response(JSON.stringify({ messages }), { status: 200 });
+    const headers = new Headers();
+    headers.append('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    headers.append('Pragma', 'no-cache');
+    headers.append('Expires', '0');
+    headers.append('Surrogate-Control', 'no-store');
+
+    return new Response(JSON.stringify({ messages }), { status: 200, headers });
   } catch (error) {
     console.error("An error occurred in generating messages:", error);
     return new Response(JSON.stringify({ error: "Failed to generate messages" }), { status: 500 });
