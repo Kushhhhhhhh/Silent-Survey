@@ -7,13 +7,21 @@
 ## Key Features:
 
 🌟 Tech stack: Next JS + AI Integration + MongoDB 
+
 🔮 Gemini API Integration
-🎃 Authentication && Authorization with NextAuth  
+
+🎃 Authentication && Authorization with NextAuth 
+
 👌 Zod for Schema Validation  
+
 🤖 ShadCN for customizable components  
+
 👾 Prioritizing User Anonymity  
+
 🚀 Interactive and User-friendly Dashboard  
+
 🐞 Error handling both on the server and on the client  
+
 ⏳ And much more!  
 
 ## Installation and Setup:
@@ -40,7 +48,7 @@
     ```
 
 4. Set up environment variables:
-    Create a `.env.local` file in the root directory and add the necessary environment variables like MongoDB_URI and NEXTAUTH_SECRET.
+    Create a `.env` file in the root directory and add the necessary environment variables like MongoDB_URI , NEXTAUTH_SECRET and Gemini API Key.
 
 5. Run the development server:
     ```bash
