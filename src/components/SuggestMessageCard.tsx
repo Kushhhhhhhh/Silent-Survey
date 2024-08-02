@@ -9,17 +9,18 @@ async function fetchSuggestions() {
     console.log('Fetching suggestions...');
     try {
       const response = await fetch('/api/suggest-messages', {
-        cache: 'no-store'
+        cache: 'no-store',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'GET',
       });
-      console.log('Response Status:', response.status);
 
       if (!response.ok) {
         throw new Error('Failed to fetch suggestions');
       }
 
       const data = await response.json();
-      console.log('Full API Response:', data);
-      console.log('Fetched suggestions:', data.messages);
       
       return data.messages;
     } catch (error) {
