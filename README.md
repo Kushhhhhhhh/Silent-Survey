@@ -6,9 +6,9 @@
 
 ## Key Features:
 
-🌟 Tech stack: Next JS + AI Integration + MongoDB 
+🌟 Tech stack: Next JS + MongoDB 
 
-🔮 Gemini API Integration
+🔮 TypeScript for type safety and Error prevention
 
 🎃 Authentication && Authorization with NextAuth 
 
