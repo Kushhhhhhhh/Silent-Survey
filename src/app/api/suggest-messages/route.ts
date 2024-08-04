@@ -18,7 +18,7 @@ const generationConfig = {
 export async function GET(request: Request) {
   try {
     const timestamp = Date.now();
-    const prompt = `Generate three unique open-ended questions for an anonymous social messaging platform. Each question should be separated by a newline. Ensure the questions are intriguing, avoid personal or sensitive topics, and foster a positive conversational environment. Request ID: ${timestamp}`;
+    const prompt = `Generate three unique open-ended questions for an anonymous social messaging platform. Each question should be separated by a newline. Ensure the questions are intriguing, avoid personal or sensitive topics, and foster a positive conversational environment.`;
 
     const generationConfig = {
       maxOutputTokens: 1000,
@@ -42,7 +42,6 @@ export async function GET(request: Request) {
 
     const text = await result.response.text();
     const messages = text.split("\n").map(msg => msg.trim()).filter(Boolean);
-    console.log(`[${timestamp}] Generated messages:`, messages); 
 
     const headers = new Headers();
     headers.append('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
