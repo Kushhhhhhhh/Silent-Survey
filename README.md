@@ -6,7 +6,7 @@
 
 ## Key Features:
 
-🌟 Tech stack: Next JS + MongoDB 
+🌟 Tech stack: Next JS + MongoDB + TypeScript
 
 🔮 TypeScript for type safety and Error prevention
 
