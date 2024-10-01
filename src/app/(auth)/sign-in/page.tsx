@@ -1,4 +1,5 @@
-'use client'
+"use client";
+
 import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -36,27 +37,37 @@ const SignInPage = () => {
     })
   
     const onSubmit = async (data: z.infer<typeof signinSchema>) => {
-        const result = await signIn('credentials', {
-            identifier: data.identifier,
-            password: data.password,
-            redirect: false,
-        })
+        setIsSubmitting(true)
+        try {
+            const result = await signIn('credentials', {
+                identifier: data.identifier,
+                password: data.password,
+                redirect: false,
+            })
 
-        if(result?.error) {
+            if(result?.error) {
+                toast({
+                    title: "Login Failed",
+                    description: "Incorrect username or password",
+                    variant: "destructive",
+                })
+            } else if(result?.url) {
+                router.replace(`/verify/${data.identifier}`)
+            }
+        } catch (error) {
             toast({
-                title: "Login Failed",
-                description: "Incorrect username or password",
+                title: "Error",
+                description: "An unexpected error occurred",
                 variant: "destructive",
             })
-        } 
-
-        if(result?.url) {
-            router.replace('/dashboard')
+        } finally {
+            setIsSubmitting(false)
         }
-}
+    }
+
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="w-full max-w-md p-8 space-x-8 bg-white rounded-lg shadow-md">
+        <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
           <div className="text-center">
             <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl mb-6">Join Silent Survey</h1>
             <p className="mb-4">Sign In to get started</p>
@@ -113,7 +124,7 @@ const SignInPage = () => {
           </div>
         </div>
       </div>
-  )
+    )
 }
 
 export default SignInPage

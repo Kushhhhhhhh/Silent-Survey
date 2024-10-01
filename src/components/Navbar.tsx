@@ -14,7 +14,10 @@ const Navbar = () => {
         <nav className="bg-white shadow-md p-4 md:p-6">
             <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
                 <div className="flex flex-row items-center">
-                    <a className="flex items-center text-2xl font-bold mb-4 md:mb-0 text-[#212121] hover:text-gray-900 transition-colors" href="#">
+
+                    <Link 
+                    className="flex items-center text-2xl font-bold mb-4 md:mb-0 text-[#212121] hover:text-gray-900 transition-colors" 
+                    href="/">
                         <Image
                             src='/favicon-ic.jpg'
                             alt='Silent Survey Logo'
@@ -24,7 +27,7 @@ const Navbar = () => {
                             priority
                         />
                         Silent Survey
-                    </a>
+                    </Link>
                 </div>
 
 

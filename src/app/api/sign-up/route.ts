@@ -1,6 +1,7 @@
 import { dbConnect } from "@/lib/dbConnect";
 import { UserModel } from "@/model/User";
 import bcrypt from "bcryptjs";
+import { SendVerificationEmail } from "@/helper/send-verification-email";
 
 export async function POST(request: Request) {
     // Connect to the database
@@ -44,6 +45,7 @@ export async function POST(request: Request) {
                 existingUserByEmail.verifyCode = verifyCode;
                 existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 1 * 60 * 60 * 1000);
                 await existingUserByEmail.save();
+                SendVerificationEmail(existingUserByEmail.email, existingUserByEmail.username, existingUserByEmail.verifyCode);
             }
         } else {
             // Create a new user if no existing user is found with the email
@@ -62,6 +64,7 @@ export async function POST(request: Request) {
                 messages: []
             });
             await newUser.save();
+            SendVerificationEmail(newUser.email, newUser.username, newUser.verifyCode);
         }
 
         // Return a success response

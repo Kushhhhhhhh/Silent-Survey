@@ -41,19 +41,34 @@ const SignupPage = () => {
     },
   })
 
+  const sendMail = async (username: string, email: string) => {
+    try {
+      const response = await axios.post('/api/send-email', {
+        username,
+        email
+      });
+      
+      if (response.data.error) {
+        throw new Error(response.data.error);
+      }
+      
+      return response.data;
+    } catch (error) {
+      console.error("Error sending email:", error);
+      throw error;
+    }
+  }
+
   useEffect(() => {
     const checkUniqueUsername = async () => {
-
       if (username) {
         setIsCheckingUsername(true)
         setUsernameMessage("")
       }
 
       try {
-
         const response = await axios.get(`/api/check-username-unique?username=${username}`)
         setUsernameMessage(response.data.message)
-        
       } catch (error) {
         const axiosError = error as AxiosError<ApiResponse>
         setUsernameMessage(axiosError.response?.data.message ?? "Error checking username")
@@ -77,10 +92,9 @@ const SignupPage = () => {
         description: response.data.message,
       })
 
+      await sendMail(data.username, data.email)
+
       router.push('/sign-in')
-
-      setIsSubmitting(false)
-
     } catch (error) {
       console.error("Error in Signing up user", error)
       const axiosError = error as AxiosError<ApiResponse>
