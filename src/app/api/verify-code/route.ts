@@ -20,6 +20,17 @@ export async function POST(request: Request) {
 
         console.log("User's verifyCode:", user.verifyCode);
         console.log("Provided code:", code);
+        console.log("User's isVerified status:", user.isVerified);
+
+        if (user.isVerified) {
+            return Response.json(
+                {
+                    success: true,
+                    message: "User is already verified",
+                },
+                { status: 200 }
+            );
+        }
 
         const isCodeValid = user.verifyCode === code;
         const isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date();
