@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@emailjs/nodejs": "^4.1.0",
     "@google/generative-ai": "^0.16.0",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -18,11 +20,12 @@
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/react-tooltip": "^1.1.2",
-    "@react-email/components": "0.0.20",
+    "@react-email/components": "^0.0.20",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "emailjs-com": "^3.2.0",
     "embla-carousel-autoplay": "^8.1.6",
     "embla-carousel-react": "^8.1.6",
     "lucide-react": "^0.408.0",
