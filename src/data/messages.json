@@ -1,26 +1,26 @@
 [
     {
         "id": 1,
-        "title": "Message from Funfrenzzy",
-        "content": "Take care of yourself ❤️",
-        "recieved": "28 minutes ago"
+        "title": "Heartfelt Note from Funfrenzzy",
+        "content": "Remember, you're stronger than you think. Take a moment for self-care today! 💪❤️",
+        "received": "28 minutes ago"
     },
     {
         "id": 2,
-        "title": "Message from stranger08",
-        "content": "What's your salary💸",
-        "recieved": "1 hour ago"
+        "title": "Curious Query from stranger08",
+        "content": "If money were no object, what would your dream job be? 🌟💼",
+        "received": "1 hour ago"
     },
     {
         "id": 3,
-        "title": "Message from Buddy23",
-        "content": "Let's catch up soon 😉",
+        "title": "Exciting Invitation from Buddy23",
+        "content": "Hey! I've got tickets to that event you mentioned. Interested in joining? 🎉🤔",
         "received": "2 days ago"
     },
     {
         "id": 4,
-        "title": "Message from Colleague22",
-        "content": "Can you review this document📄",
+        "title": "Collaborative Request from Colleague22",
+        "content": "I've added some creative ideas to our project. Mind taking a look and sharing your thoughts? 🚀📊",
         "received": "3 hours ago"
     }
 ]

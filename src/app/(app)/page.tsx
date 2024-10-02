@@ -22,28 +22,28 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <main className="flex flex-col items-center justify-between h-[80vh] py-12 px-4 md:px-24">
+    <main className="flex flex-col items-center justify-between min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-7xl mx-auto">
-        <section className="text-center mb-4 md:mb-8">
+        <section className="text-center mb-8 sm:mb-12">
           {session && (
-            <div className="text-4xl md:text-5xl font-extrabold mb-4">
+            <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4">
               Welcome, {user?.username || user?.email} 👋
             </div>
           )}
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">Explore the Realm of Anonymous Conversations</h1>
-          <p className="text-lg font-medium mt-2">
+          <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4">Explore the Realm of Anonymous Conversations</h1>
+          <p className="text-base sm:text-lg font-medium mt-2 max-w-2xl mx-auto">
             Silent Survey - Your Decentralized Hub for Secure and Anonymous Messaging.
           </p>
         </section>
 
-        <section className="text-center mb-4 md:mb-8">
+        <section className="text-center mb-8 sm:mb-12">
           <Link href="/dashboard">
             <Button
-              className="w-full md:w-auto mt-3 px-6 py-4 text-lg rounded-2xl bg-[#212121] text-white hover:bg-black"
+              className="w-full sm:w-auto mt-3 px-6 py-3 sm:py-4 text-base sm:text-lg rounded-2xl bg-[#212121] text-white hover:bg-black transition-colors duration-300"
               disabled={!session || loading}
             >
               {loading ? (
-                <Loader2 className="w-8 h-8 mx-auto animate-spin" />
+                <Loader2 className="w-6 h-6 sm:w-8 sm:h-8 mx-auto animate-spin" />
               ) : (
                 'Get Started'
               )}
@@ -51,24 +51,24 @@ export default function Home() {
           </Link>
         </section>
 
-        <div className="max-w-6xl mx-auto my-16">
+        <div className="max-w-6xl mx-auto my-8 sm:my-16">
           <Carousel className="w-full" plugins={[Autoplay({ delay: 2000 })]}>
             <CarouselContent>
               {messages.map((message, index) => (
                 <CarouselItem key={index} className="p-2">
-                  <Card className="bg-white shadow-lg rounded-lg overflow-hidden">
+                  <Card className="bg-white shadow-lg rounded-lg overflow-hidden h-full">
                     <CardHeader className="bg-[#212121] text-white text-center p-4">
-                      {message.title}
+                      <h3 className="text-lg sm:text-xl font-semibold">{message.title}</h3>
                     </CardHeader>
-                    <CardContent className="flex flex-col items-center justify-center p-6">
-                      <span className="text-lg font-medium text-[#212121]">{message.content}</span>
+                    <CardContent className="flex flex-col items-center justify-center p-4 sm:p-6 h-40 sm:h-48">
+                      <span className="text-base sm:text-lg font-medium text-[#212121] text-center">{message.content}</span>
                     </CardContent>
                   </Card>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 bg-[#212121] text-white rounded-full hover:bg-gray-700 transition duration-300 md:hidden" />
-            <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 bg-[#212121] text-white rounded-full hover:bg-gray-700 transition duration-300 md:hidden" />
+            <CarouselPrevious className="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 bg-[#212121] text-white rounded-full hover:bg-gray-700 transition duration-300 hidden sm:flex" />
+            <CarouselNext className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 bg-[#212121] text-white rounded-full hover:bg-gray-700 transition duration-300 hidden sm:flex" />
           </Carousel>
         </div>
       </div>
