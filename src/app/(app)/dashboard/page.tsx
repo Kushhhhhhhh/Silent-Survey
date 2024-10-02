@@ -52,6 +52,10 @@ const Dashboard = () => {
   }, [setValue, toast])
 
   const fetchMessages = useCallback(async (refresh: boolean = false) => {
+    if (!session?.user) {
+      console.log("Session or user not available")
+      return
+    }
     setIsLoading(true)
     try {
       const { data } = await axios.get<ApiResponse>('/api/get-messages')
@@ -64,15 +68,16 @@ const Dashboard = () => {
       }
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>
+      console.error("Error fetching messages:", axiosError.response?.data)
       toast({
         title: 'Error fetching messages',
-        description: axiosError.response?.data.message,
+        description: axiosError.response?.data.message || "An unexpected error occurred",
         variant: 'destructive',
       })
     } finally {
       setIsLoading(false)
     }
-  }, [toast])
+  }, [toast, session])
 
   useEffect(() => {
     if (session?.user) {
@@ -118,7 +123,7 @@ const Dashboard = () => {
   }
 
   const { username } = session.user
-  const baseUrl = `${window.location.protocol}//${window.location.host}`
+  const baseUrl = typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.host}` : ''
   const profileUrl = `${baseUrl}/u/${username}`
 
   const copyToClipboard = () => {

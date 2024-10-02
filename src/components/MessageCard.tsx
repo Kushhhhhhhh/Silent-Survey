@@ -66,15 +66,17 @@ const MessageCard = ({
   };
 
   return (
-    <Card className="overflow-hidden flex justify-center bg-[#212121] rounded-2xl shadow-lg">
-      <CardContent className="px-8 py-6  text-white text-center">
-        <p className="text-lg font-medium">{message.content}</p>
-        <p className="text-sm text-gray-400 font-medium">Sent at: {new Date(message.createdAt).toLocaleString()}</p>
+    <Card className="w-full max-w-sm mx-auto overflow-hidden flex flex-col justify-between bg-[#212121] rounded-2xl shadow-lg h-[250px]">
+      <CardContent className="px-6 py-4 text-white text-center flex-grow flex flex-col justify-between">
+        <div>
+          <p className="text-lg font-medium mb-2">{message.content}</p>
+          <p className="text-sm text-gray-400 font-medium">Sent at: {new Date(message.createdAt).toLocaleString()}</p>
+        </div>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="destructive" className="mt-4 flex items-center bg-white rounded-2xl space-x-1">
+            <Button variant="destructive" className="mt-4 flex items-center bg-white rounded-2xl space-x-1 w-full justify-center">
               <X className="h-5 w-5 text-red-600" />
-              <span className="text-sm font-medium ml-4 text-[#212121]">Remove</span>
+              <span className="text-sm font-medium ml-2 text-[#212121]">Remove</span>
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent className="rounded-lg shadow-lg">

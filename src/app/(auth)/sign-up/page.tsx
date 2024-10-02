@@ -41,24 +41,6 @@ const SignupPage = () => {
     },
   })
 
-  const sendMail = async (username: string, email: string) => {
-    try {
-      const response = await axios.post('/api/send-email', {
-        username,
-        email
-      });
-      
-      if (response.data.error) {
-        throw new Error(response.data.error);
-      }
-      
-      return response.data;
-    } catch (error) {
-      console.error("Error sending email:", error);
-      throw error;
-    }
-  }
-
   useEffect(() => {
     const checkUniqueUsername = async () => {
       if (username) {
@@ -87,22 +69,15 @@ const SignupPage = () => {
       const response = await axios.post<ApiResponse>('/api/sign-up', data)
       console.log('Signup Data:', data)  
 
-      toast({
-        title: "Success",
-        description: response.data.message,
-      })
-
-      await sendMail(data.username, data.email)
-
       router.push('/sign-in')
     } catch (error) {
+      
       console.error("Error in Signing up user", error)
       const axiosError = error as AxiosError<ApiResponse>
-      let errorMessage = axiosError.response?.data.message
 
       toast({
         title: "SignUp Failed",
-        description: errorMessage,
+        description: axiosError.response?.data.message,
         variant: "destructive",
       })
     } finally {
@@ -180,10 +155,8 @@ const SignupPage = () => {
             <Button type="submit" disabled={isSubmitting} className="w-full">
               {
                 isSubmitting ? (
-                  <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Please Wait
-                  </>
+                  
                 ) : ('Sign up')
               }
             </Button>
