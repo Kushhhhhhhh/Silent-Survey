@@ -1,43 +1,52 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const apiKey = process.env.GEMINI_API_KEY;
-const genAI = new GoogleGenerativeAI(apiKey as string);
+
+if (!apiKey) {
+  console.error("GEMINI_API_KEY is not set in the environment variables");
+  throw new Error("GEMINI_API_KEY is missing");
+}
+
+const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
     model: "gemini-pro",
 });
 
 const generationConfig = {
-    temperature: 1.0,
+    temperature: 0.8,
     topP: 1,
-    maxOutputTokens: 1000,
+    maxOutputTokens: 200,
 };
 
-const prompt = `Generate three unique, thought-provoking questions that encourage self-reflection and meaningful conversation. These questions should be suitable for social interactions or personal journaling. Separate each question with two pipe characters (||).
+const prompt = `Create a list of two open-ended and engaging questions formatted as a single string. These questions should be separated by '||'. These questions are for an anonymous social messaging platform and should be suitable for a diverse audience. Avoid personal and sensitive topics, focusing instead on universal themes. This will encourage friendly interaction. 
 
-The questions should:
-1. Be open-ended and not have simple yes/no answers
-2. Cover a variety of topics such as personal growth, experiences, opinions, or hypothetical scenarios
-3. Be engaging and spark interesting discussions
-4. Be appropriate for a general audience
+Your output should be structured like this:
+What's a hobby you've recently started? || If you could have dinner with any historical figure, who would it be?
 
-Please provide the questions in the following format:
-Question 1 || Question 2 || Question 3
-
-Important: Each time this prompt is used, generate completely different questions from any previous responses.`;
+Ensure the questions are intriguing, foster curiosity, and contribute to a positive and welcoming conversational environment.`;
 
 export async function GET(request: Request) {
+  console.log("Received GET request for suggest-messages");
   try {
     const currentTime = new Date().toISOString();
     const dynamicPrompt = `${prompt}\n\nCurrent timestamp: ${currentTime}`;
 
+    console.log("Generating content with dynamic prompt:", dynamicPrompt);
     const result = await model.generateContent({
       contents: [{ role: "user", parts: [{ text: dynamicPrompt }]}],
       generationConfig,
     });
     const response = await result.response;
     const text = response.text();
-    const messages = [text];
+    
+    console.log("Generated text:", text);
+    const questions = text.split('||').map(question => question.trim());
+
+    if (questions.length !== 2) {
+      console.warn("Generated content does not contain exactly two questions");
+      return new Response(JSON.stringify({ error: "Invalid generated content" }), { status: 500 });
+    }
 
     const headers = new Headers({
       'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
@@ -46,7 +55,8 @@ export async function GET(request: Request) {
       'Surrogate-Control': 'no-store'
     });
 
-    return new Response(JSON.stringify({ messages }), { status: 200, headers });
+    console.log("Returning generated questions:", questions);
+    return new Response(JSON.stringify({ messages: questions }), { status: 200, headers });
   } catch (error) {
     console.error("An error occurred in generating messages:", error);
     return new Response(JSON.stringify({ error: "Failed to generate messages" }), { status: 500 });

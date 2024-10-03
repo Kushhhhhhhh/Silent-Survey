@@ -29,17 +29,16 @@ export const authOptions: NextAuthOptions = {
                         throw new Error("User not found with this Email or Username");
                     }
 
-                    if (!user.isVerified) {
-                        throw new Error("Please verify your account before Login");
-                    }
-
                     const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
 
                     if (!isPasswordCorrect) {
                         throw new Error("Incorrect password");
-                    } else {
-                        return user;
                     }
+
+                    return {
+                        ...user.toObject(),
+                        isVerified: user.isVerified
+                    };
                 } catch (error: any) {
                     throw new Error(error.message);
                 }

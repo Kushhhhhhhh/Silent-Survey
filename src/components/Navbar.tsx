@@ -15,26 +15,26 @@ const Navbar = () => {
             <div className="container mx-auto flex justify-between items-center h-10">
                 <div className="flex items-center">
                     <Link 
-                    className="flex items-center text-2xl font-bold text-[#212121] hover:text-gray-900 transition-colors" 
+                    className="flex items-center text-lg sm:text-2xl font-bold text-[#212121] hover:text-gray-900 transition-colors" 
                     href="/">
                         <Image
                             src='/favicon-ic.jpg'
                             alt='Silent Survey Logo'
                             width={40}
                             height={40}
-                            className="mr-3 rounded-full object-cover"
+                            className="mr-2 rounded-full object-cover"
                             priority
                         />
-                        <span className="hidden sm:inline">Silent Survey</span>
+                        <span className="inline text-md sm:text-xl">Silent Survey</span>
                     </Link>
                 </div>
 
                 <div className="flex items-center">
                     {session ? (
-                        <Button className="px-6 py-2 rounded-full bg-[#212121] text-white hover:bg-black transition-colors" onClick={() => signOut()}>Logout</Button>
+                        <Button className="px-4 sm:px-6 py-2 rounded-full bg-[#212121] text-white hover:bg-black transition-colors" onClick={() => signOut()}>Logout</Button>
                     ) : (
                         <Link href="/sign-in">
-                            <Button className="px-6 py-2 rounded-full bg-[#212121] text-white hover:bg-slate-900 transition-colors">Login</Button>
+                            <Button className="px-4 sm:px-6 py-2 rounded-full bg-[#212121] text-white hover:bg-slate-900 transition-colors">Login</Button>
                         </Link>
                     )}
                 </div>

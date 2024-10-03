@@ -8,24 +8,23 @@ const usernameQuerySchema = z.object({
 })
 
 export async function GET(request: Request) {
-
-    await dbConnect();
-
     try {
+        await dbConnect();
 
         const { searchParams } = new URL(request.url);
         const queryParam = {
             username: searchParams.get("username")
         }
         const result = usernameQuerySchema.safeParse(queryParam);
-        console.log(result);
+        console.log("Username validation result:", JSON.stringify(result, null, 2));
 
         if (!result.success) {
             const usernameErrors = result.error.format().username?._errors || [];
+            console.log("Username validation failed:", usernameErrors);
 
             return Response.json({
                 success: false,
-                message: "Username is not unique",
+                message: "Invalid username",
                 errors: usernameErrors
             },
             { status: 400 });
@@ -39,6 +38,7 @@ export async function GET(request: Request) {
         })
 
         if (existingVerifiedUser) {
+            console.log(`Username "${username}" already exists`);
             return Response.json({
                 success: false,
                 message: "Username already exists"
@@ -46,16 +46,18 @@ export async function GET(request: Request) {
             { status: 400 });
         }
 
+        console.log(`Username "${username}" is unique`);
         return Response.json({ 
             success: true, 
-            message: "Username is unique" });
+            message: "Username is unique" 
+        });
 
-    } catch (error: any) {
-        console.log("Error checking Username", error);
+    } catch (error) {
+        console.error("Error checking username:", error);
         return Response.json({
             success: false,
-            message: "Error checking Username"
+            message: "Error checking username"
         },
-            { status: 500 });
+        { status: 500 });
     }
 }
